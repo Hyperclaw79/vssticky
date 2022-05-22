@@ -26,6 +26,14 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
         }
     }
 
+    public deleteSticky(file: string) {
+        this._context.globalState.update(file, undefined);
+        this._noteData = '';
+        if (this._view) {
+            this._view.webview.html = this._getHtmlForWebview(this._view.webview);
+        }
+    }
+
 	public resolveWebviewView(
 		webviewView: vscode.WebviewView,
 		context: vscode.WebviewViewResolveContext,

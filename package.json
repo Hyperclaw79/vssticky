@@ -17,8 +17,13 @@
 		"commands": [
 			{
 				"command": "vssticky.addStickyNote",
-				"category": "VsSticky",
+				"category": "VSSticky",
 				"title": "Add Sticky Note"
+			},
+			{
+				"command": "vssticky.deleteStickyNote",
+				"category": "VSSticky",
+				"title": "Delete Sticky Note"
 			}
 		],
 		"views": {

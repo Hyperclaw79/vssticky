@@ -32,8 +32,20 @@ export function activate(context: vscode.ExtensionContext) {
 				);
 				return;
 			}
-			// let filename = path.basename(filepath);
 			vscode.commands.executeCommand('niview.focus');
+		})
+	);
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand('vssticky.deleteStickyNote', async () => {
+			let filepath = vscode.window.activeTextEditor?.document.fileName;
+			if (!filepath) {
+				vscode.window.showErrorMessage(
+					'You need to use this command when editing a file.'
+				);
+				return;
+			}
+			provider.deleteSticky(filepath);
 		})
 	);
 
