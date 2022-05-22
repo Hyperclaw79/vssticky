@@ -1,0 +1,7 @@
+.noteInput {
+    border-top: 2rem solid var(--vscode-tab-activeModifiedBorder);
+    width: 90vw;
+    height: 80vh;
+    margin-left: auto;
+    margin-right: auto;
+}
