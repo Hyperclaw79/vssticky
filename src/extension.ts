@@ -52,7 +52,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	async function openNote(editor?: vscode.TextEditor) {
 		let currFile = editor?.document.fileName;
 		await provider.switchFile(currFile);
-		if (currFile) {
+		if (currFile && context.globalState.get(currFile)) {
 			vscode.commands.executeCommand('niview.focus');
 		}
 	}
