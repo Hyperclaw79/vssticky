@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import './utils';
 import { NoteInputProvider } from './NoteInputProvider';
 
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
 	const provider = new NoteInputProvider(
 		context,
 		vscode.window.activeTextEditor?.document.fileName
@@ -15,11 +15,11 @@ export function activate(context: vscode.ExtensionContext) {
 		)
 	);
 
-	openNote(vscode.window.activeTextEditor);
+	await openNote(vscode.window.activeTextEditor);
 
 	context.subscriptions.push(
-		vscode.window.onDidChangeActiveTextEditor(editor => {
-			openNote(editor);
+		vscode.window.onDidChangeActiveTextEditor(async editor => {
+			await openNote(editor);
 		})
 	);
 
@@ -45,14 +45,14 @@ export function activate(context: vscode.ExtensionContext) {
 				);
 				return;
 			}
-			provider.deleteSticky(filepath);
+			await provider.deleteSticky(filepath);
 		})
 	);
 
-	function openNote(editor?: vscode.TextEditor) {
+	async function openNote(editor?: vscode.TextEditor) {
 		let currFile = editor?.document.fileName;
+		await provider.switchFile(currFile);
 		if (currFile) {
-			provider.switchFile(currFile);
 			vscode.commands.executeCommand('niview.focus');
 		}
 	}

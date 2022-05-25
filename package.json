@@ -2,7 +2,7 @@
   "name": "vssticky",
 	"displayName": "VSSticky",
 	"description": "Attach sticky notes on your files, from inside VS Code.",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"engines": {
 		"vscode": "^1.67.0"
 	},
@@ -24,6 +24,11 @@
 				"command": "vssticky.deleteStickyNote",
 				"category": "VSSticky",
 				"title": "Delete Sticky Note"
+			},
+			{
+				"command": "vssticky.deleteAllNotes",
+				"category": "VSSticky",
+				"title": "Delete All Notes"
 			}
 		],
 		"views": {

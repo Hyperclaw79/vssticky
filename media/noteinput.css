@@ -1,7 +1,37 @@
-.noteInput {
-    border-top: 2rem solid var(--vscode-tab-activeModifiedBorder);
+.noteInput,
+.rendered {
+    display: block;
     width: 90vw;
     height: 80vh;
     margin-left: auto;
     margin-right: auto;
+    border: none;
+    border-top: 2rem solid var(--vscode-tab-activeModifiedBorder);
+    font-family: var(--vscode-font-family);
+    padding: var(--input-padding-vertical) var(--input-padding-horizontal);
+    color: var(--vscode-input-foreground);
+    background-color: var(--vscode-input-background);
+    outline-color: var(--vscode-input-border);
+}
+
+.btnContainer {
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.renderBtn {
+    width: 10vw;
+    min-width: 10rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.renderBtn:disabled {
+    opacity: 0.5;
+}
+
+.hide {
+    display: none;
 }
