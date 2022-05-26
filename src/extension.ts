@@ -68,6 +68,12 @@ export async function activate(context: vscode.ExtensionContext) {
 			vscode.commands.executeCommand('niview.focus');
 		}
 	}
+
+	return {
+		extendMarkdownIt(md: any) {
+			return md.use(require('markdown-it-checkbox'));
+		}
+	};
 }
 
-export function deactivate() {}
+export function deactivate() { }

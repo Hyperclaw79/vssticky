@@ -47,6 +47,23 @@ const rgbToHex = (r, g, b) => {
     const renderHolder = document.querySelector('#renderHolder');
     const colorPicker = document.querySelector('#colorPicker');
 
+    const checkChanged = (event) => {
+        let checkbox = event.target;
+        let enabled = checkbox.checked;
+        let labelText = checkbox.labels[0].textContent;
+        let noteText = noteInput.value;
+        let patt = new RegExp(`(\\[[xX\\s]\\])\\s${labelText}`);
+        let replacedText = noteText.replace(
+            patt, `[${enabled ? 'X': ' '}] ${labelText}`
+        );
+        noteInput.value = replacedText;
+        sendMessage(noteInput.value, colorPicker.value);
+    };
+
+    renderHolder.querySelectorAll('input[type=checkbox]').forEach(
+        cb => cb.addEventListener('input', checkChanged)
+    );
+
     const modifyState = () => {
         if (renderButton.dataset['rendered'] === "true") {
             renderHolder.innerHTML = '';
@@ -117,6 +134,9 @@ const rgbToHex = (r, g, b) => {
             noteInput.classList.add('hide');
             renderHolder.classList.remove('hide');
             renderHolder.innerHTML = e.data.content;
+            renderHolder.querySelectorAll('input[type=checkbox]').forEach(
+                cb => cb.addEventListener('input', checkChanged)
+            );
             renderButton.innerText = 'Raw';
             renderButton.dataset['rendered'] = "true";
         }

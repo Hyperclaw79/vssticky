@@ -13,6 +13,7 @@
     color: var(--vscode-input-foreground);
     background-color: var(--vscode-input-background);
     outline-color: var(--vscode-input-border);
+    white-space: pre-wrap;
 }
 
 .noteInput:focus,
@@ -22,6 +23,11 @@
 
 .noteInput {
     resize: vertical;
+}
+
+.rendered ul,
+.rendered ol {
+    line-height: 1;
 }
 
 .colorPicker {
