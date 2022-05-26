@@ -17,7 +17,7 @@ const sendMessage = debounce((text, color) => {
         content: text,
         color: color
     });
-}, 500);
+}, autosaveInterval);
 
 const rgbToHex = (r, g, b) => {
     const toHex = (r_, g_, b_) => {

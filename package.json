@@ -2,7 +2,7 @@
   "name": "vssticky",
   "displayName": "VSSticky",
   "description": "Attach sticky notes on your files, from inside VS Code.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "engines": {
     "vscode": "^1.67.0"
   },
@@ -14,6 +14,19 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration":[
+      {
+        "title": "VSSticky",
+        "properties": {
+          "vssticky.autosaveInterval": {
+            "type": "number",
+            "default": 500,
+            "markdownDescription": "The **interval** (in milliseconds) to save the sticky notes automatically.",
+            "minimum": 500
+          }
+        }
+      }
+    ],
     "commands": [
       {
         "command": "vssticky.addStickyNote",

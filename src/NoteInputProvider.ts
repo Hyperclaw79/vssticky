@@ -105,6 +105,9 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 		// Use a nonce to only allow a specific script to be run.
 		const nonce = getNonce();
 
+		let extensionSettings = vscode.workspace.getConfiguration('vssticky');
+		let autosaveInterval = extensionSettings.get('autosaveInterval');
+
 		return `<!DOCTYPE html>
 			<html lang="en">
 			<head>
@@ -145,6 +148,9 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 				<div class="btnContainer">
 					<button id="renderer" class="renderBtn" ${existingContent ? 'data-rendered="true"' : ''} ${existingContent ? "" : "disabled"}>${existingContent ? 'Raw' : 'Render'}</button>
 				</div>
+				<script nonce="${nonce}">
+					let autosaveInterval = ${autosaveInterval};
+				</script>
 				<script nonce="${nonce}" src="${scriptUri}"></script>
 			</body>
 			</html>`;
