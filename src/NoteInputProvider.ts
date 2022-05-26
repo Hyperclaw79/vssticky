@@ -5,6 +5,8 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 
 	public static readonly viewType = 'niview';
 
+	public ephemeralMode: boolean = false;
+
 	private _view?: vscode.WebviewView;
 
 	private _extensionUri: vscode.Uri;
@@ -17,6 +19,11 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 	}
 
 	public async switchFile(file: string | undefined) {
+		this.ephemeralMode = false;
+		await this.resetView();
+	}
+
+	public async resetView() {
 		if (this._view) {
 			this._view.webview.html = await this._getHtmlForWebview(this._view.webview);
 		}
@@ -24,8 +31,12 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 
 	public async deleteSticky(file: string) {
 		this._context.globalState.update(file, undefined);
+		this.clearView();
+	}
+
+	public clearView() {
 		if (this._view) {
-			this._view.webview.html = await this._getHtmlForWebview(this._view.webview);
+			this._view.webview.html = '';
 		}
 	}
 
@@ -52,7 +63,7 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 				case 'updateNote':
 					{
 						let currentFile = vscode.window.activeTextEditor?.document.fileName;
-						if (currentFile) {
+						if (currentFile && !this.ephemeralMode) {
 							this._context.globalState.update(
 								currentFile,
 								JSON.stringify({

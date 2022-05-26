@@ -2,7 +2,7 @@
   "name": "vssticky",
   "displayName": "VSSticky",
   "description": "Attach sticky notes on your files, from inside VS Code.",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "engines": {
     "vscode": "^1.67.0"
   },
@@ -32,6 +32,11 @@
         "command": "vssticky.addStickyNote",
         "category": "VSSticky",
         "title": "Add Sticky Note"
+      },
+      {
+        "command": "vssticky.addEphemeralNote",
+        "category": "VSSticky",
+        "title": "Add Ephemeral Note"
       },
       {
         "command": "vssticky.deleteStickyNote",

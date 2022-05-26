@@ -31,7 +31,31 @@ export async function activate(context: vscode.ExtensionContext) {
 				);
 				return;
 			}
+			await provider.resetView();
 			vscode.commands.executeCommand('niview.focus');
+		})
+	);
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand('vssticky.addEphemeralNote', async () => {
+			let filepath = vscode.window.activeTextEditor?.document.fileName;
+			if (!filepath) {
+				vscode.window.showErrorMessage(
+					'You need to use this command when editing a file.'
+				);
+				return;
+			}
+			if (context.globalState.get(filepath)) {
+				vscode.window.showErrorMessage(
+					`This file already has a sticky note.
+					Please delete it before adding an ephemeral note.`
+				);
+			}
+			else {
+				await provider.resetView();
+				provider.ephemeralMode = true;
+				vscode.commands.executeCommand('niview.focus');
+			}
 		})
 	);
 
