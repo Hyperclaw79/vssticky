@@ -19,6 +19,18 @@
 				"kind": "build",
 				"isDefault": true
 			}
+		},
+		// Task to Run VSCE Package and install the generated .vsix
+		{
+			"label": "Package Local Extension",
+			"type": "shell",
+			"command": "yes | vsce package -o vssticky.vsix"
+		},
+		{
+			"label": "Install Local Extension",
+			"type": "shell",
+			"command": "code-insiders --install-extension vssticky.vsix",
+			"dependsOn": "Package Local Extension"
 		}
 	]
 }
