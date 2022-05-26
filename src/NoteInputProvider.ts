@@ -9,8 +9,6 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 
 	private _extensionUri: vscode.Uri;
 
-	private _noteData: string = '';
-
 	constructor(
 		private _context: vscode.ExtensionContext,
 		public currentFile: string | undefined,
@@ -26,7 +24,6 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 
 	public async deleteSticky(file: string) {
 		this._context.globalState.update(file, undefined);
-		this._noteData = '';
 		if (this._view) {
 			this._view.webview.html = await this._getHtmlForWebview(this._view.webview);
 		}
@@ -58,7 +55,10 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 						if (currentFile) {
 							this._context.globalState.update(
 								currentFile,
-								data.content === '' ? undefined : data.content
+								JSON.stringify({
+									content: data.content === '' ? undefined : data.content,
+									color: data.color,
+								})
 							);
 						}
 						break;
@@ -88,9 +88,14 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 		const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'media', 'noteinput.css'));
 
 		let currentFile = vscode.window.activeTextEditor?.document.fileName;
-		let existingContent, parsedContent;
+		let existingContent, parsedContent, color;
 		if (currentFile) {
-			existingContent = this._context.globalState.get(currentFile);
+			const noteObj: string | undefined = this._context.globalState.get(currentFile);
+			if (noteObj) {
+				(
+					{ content: existingContent, color } = JSON.parse(noteObj)
+				);
+			}
 			if (existingContent) {
 				parsedContent = await vscode.commands.executeCommand(
 					'markdown.api.render', existingContent
@@ -108,19 +113,35 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 					Use a content security policy to only allow loading images from https or from our extension directory,
 					and only allow scripts that have a specific nonce.
 				-->
-				<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+				<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource + ` 'nonce-${nonce}'`}; script-src 'nonce-${nonce}';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<link href="${styleResetUri}" rel="stylesheet">
 				<link href="${styleVSCodeUri}" rel="stylesheet">
 				<link href="${styleMainUri}" rel="stylesheet">
 				
 				<title>Notes</title>
+				${
+					color ? `<style nonce=${nonce}>
+						.noteInput,
+						.rendered {
+							border-top-color: ${color};
+						}
+					</style>` : '' 
+				}
 			</head>
 			<body>
-				<textarea class="noteInput${existingContent ? ' hide' : ''}" placeholder="Enter your note here....">${existingContent || ''}</textarea>
-				<div id="renderHolder" class="rendered${existingContent ? '' : ' hide'}">
-				${parsedContent || ''}
-				</div>
+				<input id="colorPicker" type="color" class="colorPicker" ${color ? `value="${color}"` : ''}>
+				</input>
+				<textarea
+					class="noteInput${existingContent ? ' hide' : ''}"
+					placeholder="Enter your note here (Markdown supported)...."
+					nonce="${nonce}"
+				>${existingContent || ''}</textarea>
+				<div
+					id="renderHolder"
+					class="rendered${existingContent ? '' : ' hide'}"
+					nonce="${nonce}"
+				>${parsedContent || ''}</div>
 				<div class="btnContainer">
 					<button id="renderer" class="renderBtn" ${existingContent ? 'data-rendered="true"' : ''} ${existingContent ? "" : "disabled"}>${existingContent ? 'Raw' : 'Render'}</button>
 				</div>

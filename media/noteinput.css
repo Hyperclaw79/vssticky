@@ -2,7 +2,8 @@
 .rendered {
     display: block;
     width: 90vw;
-    height: 80vh;
+    min-height: 40vh;
+    height: min-content;
     margin-left: auto;
     margin-right: auto;
     border: none;
@@ -12,6 +13,26 @@
     color: var(--vscode-input-foreground);
     background-color: var(--vscode-input-background);
     outline-color: var(--vscode-input-border);
+}
+
+.noteInput:focus,
+.rendered:focus {
+    outline-color: var(--vscode-input-border);
+}
+
+.noteInput {
+    resize: vertical;
+}
+
+.colorPicker {
+    position: absolute;
+    top: -0.25rem;
+    right: 5vw;
+    width: 2.5rem !important;
+    height: 2.5rem;
+    background-color: transparent !important;
+    cursor: pointer;
+    filter: drop-shadow(1px 1px 2px black);
 }
 
 .btnContainer {

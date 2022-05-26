@@ -49,6 +49,18 @@ export async function activate(context: vscode.ExtensionContext) {
 		})
 	);
 
+	context.subscriptions.push(
+		vscode.commands.registerCommand('vssticky.deleteAllNotes', async () => {
+			for (let file of context.globalState.keys()) {
+				context.globalState.update(file, undefined);
+			}
+			let editor = vscode.window.activeTextEditor;
+			if (editor) {
+				await openNote(editor);
+			}
+		})
+	);
+
 	async function openNote(editor?: vscode.TextEditor) {
 		let currFile = editor?.document.fileName;
 		await provider.switchFile(currFile);

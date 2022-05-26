@@ -11,17 +11,41 @@ const debounce = (func, wait) => {
     };
 };
 
-const postMessage = debounce((text) => {
+const sendMessage = debounce((text, color) => {
     vscode.postMessage({
         type: 'updateNote',
-        content: text
+        content: text,
+        color: color
     });
 }, 500);
+
+const rgbToHex = (r, g, b) => {
+    const toHex = (r_, g_, b_) => {
+        return '#' + [r_, g_, b_].map(x => {
+            const hex = x.toString(16);
+            return hex.length === 1 ? '0' + hex : hex;
+        }).join('');
+    };
+    if (typeof r === 'string') {
+        let patt = new RegExp(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/, 'g');
+        let matches = Array.from(r.matchAll(patt));
+        if (matches.length < 1 || matches[0].length < 4) {
+            throw new Error('Invalid rgb string');
+        }
+        let [r_, g_, b_] = matches[0].splice(1).map(x => parseInt(x));
+        return toHex(r_, g_, b_);
+    }
+    else if (g && b) {
+        return toHex(r, g, b);
+    }
+    throw new Error('Invalid arguments');
+};
 
 (function () {
     const noteInput = document.querySelector('textarea.noteInput');
     const renderButton = document.querySelector('#renderer');
     const renderHolder = document.querySelector('#renderHolder');
+    const colorPicker = document.querySelector('#colorPicker');
 
     const modifyState = () => {
         if (renderButton.dataset['rendered'] === "true") {
@@ -40,15 +64,41 @@ const postMessage = debounce((text) => {
         }
     };
 
+    if (!colorPicker.getAttribute('value')) {
+        colorPicker.setAttribute(
+            'value',
+            rgbToHex(
+                getComputedStyle(noteInput).getPropertyValue('border-top-color')
+            )
+        );
+    }
+
+    colorPicker.addEventListener('input', (e) => {
+        noteInput.style.borderTopColor = e.target.value;
+        renderHolder.style.borderTopColor = e.target.value;
+    });
+
+    colorPicker.addEventListener('change', (e) => {
+        const text = noteInput.value;
+        const color = e.target.value;
+        sendMessage(text, color);
+    });
+
     noteInput.addEventListener('input', (e) => {
         const text = e.target.value;
+        const color = colorPicker.value;
         if (text.length > 0) {
             renderButton.disabled = false;
         }
         else {
             renderButton.disabled = true;
         }
-        postMessage(text);
+        sendMessage(text, color);
+    });
+
+    noteInput.addEventListener('focusout', (e) => {
+        e.preventDefault();
+        modifyState();
     });
 
     renderButton.addEventListener('click', (e) => {
@@ -73,4 +123,3 @@ const postMessage = debounce((text) => {
     });
 
 }());
-
