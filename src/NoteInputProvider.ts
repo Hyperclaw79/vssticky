@@ -123,6 +123,18 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 		let extensionSettings = vscode.workspace.getConfiguration('vssticky');
 		let autosaveInterval = extensionSettings.get('autosaveInterval');
 
+		
+		/* eslint-disable @typescript-eslint/naming-convention */
+		let cspStr = Object.entries({
+			"default-src": "'none'",
+			"style-src": `${webview.cspSource + ` 'nonce-${nonce}'`}`,
+			"script-src": `'nonce-${nonce}'`,
+			"img-src": "* 'self' https:;"
+		}).map(([key, value]) => {
+			return `${key} ${value}`;
+		}).join('; ');
+		/* eslint-enable @typescript-eslint/naming-convention */
+
 		return `<!DOCTYPE html>
 			<html lang="en">
 			<head>
@@ -131,7 +143,7 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 					Use a content security policy to only allow loading images from https or from our extension directory,
 					and only allow scripts that have a specific nonce.
 				-->
-				<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource + ` 'nonce-${nonce}'`}; script-src 'nonce-${nonce}';">
+				<meta http-equiv="Content-Security-Policy" content="${cspStr}">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<link href="${styleResetUri}" rel="stylesheet">
 				<link href="${styleVSCodeUri}" rel="stylesheet">
