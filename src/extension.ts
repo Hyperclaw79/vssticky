@@ -94,7 +94,11 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	return {
 		extendMarkdownIt(md: any) {
-			return md.use(require('markdown-it-checkbox'));
+			return md.use(
+				require('markdown-it-checkbox')
+			).use(
+				require('markdown-it-emoji')
+			);
 		}
 	};
 }
