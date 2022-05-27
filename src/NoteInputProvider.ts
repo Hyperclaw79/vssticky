@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import type { AllNotesProvider } from './AllNotesProvider';
 import { getNonce } from './utils';
 
 export class NoteInputProvider implements vscode.WebviewViewProvider {
@@ -14,6 +15,7 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 	constructor(
 		private _context: vscode.ExtensionContext,
 		public currentFile: string | undefined,
+		private _anview: AllNotesProvider
 	) {
 		this._extensionUri = _context.extensionUri;
 	}
@@ -31,6 +33,7 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 
 	public async deleteSticky(file: string) {
 		this._context.globalState.update(file, undefined);
+		this._anview.refreshNotes();
 		this.clearView();
 	}
 
@@ -71,6 +74,7 @@ export class NoteInputProvider implements vscode.WebviewViewProvider {
 									color: data.color,
 								})
 							);
+							this._anview.refreshNotes();
 						}
 						break;
 					}

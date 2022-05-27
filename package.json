@@ -2,7 +2,7 @@
   "name": "vssticky",
   "displayName": "VSSticky",
   "description": "Attach sticky notes on your files, from inside VS Code.",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "engines": {
     "vscode": "^1.67.0"
   },
@@ -54,6 +54,13 @@
         {
           "id": "niview",
           "name": "Notes",
+          "type": "webview"
+        }
+      ],
+      "explorer": [
+        {
+          "id": "anview",
+          "name": "All VSSticky Notes",
           "type": "webview"
         }
       ]

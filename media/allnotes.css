@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+p {
+    font-family: 'Reenie Beanie';
+    font-size: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #000;
+    background: var(--vscode-tab-activeModifiedBorder);
+    display: block;
+    height: 16em;
+    width: 16em;
+    padding: 1em;
+    box-shadow: -2px -2px 3px rgb(0 0 0);
+    transition: transform .15s linear;
+}
+
+ul li a:hover,
+ul li a:focus,
+ul li a:active {
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, .7);
+    transform: scale(1.25);
+    position: relative;
+    z-index: 5;
+    color: inherit;
+    text-decoration: none;
+}
+
+ul li {
+    margin: 1em;
+}

@@ -1,16 +1,24 @@
 import * as vscode from 'vscode';
 import './utils';
 import { NoteInputProvider } from './NoteInputProvider';
+import { AllNotesProvider } from './AllNotesProvider';
 
 export async function activate(context: vscode.ExtensionContext) {
-	const provider = new NoteInputProvider(
+	const anProvider = new AllNotesProvider(context);
+	const niProvider = new NoteInputProvider(
 		context,
-		vscode.window.activeTextEditor?.document.fileName
+		vscode.window.activeTextEditor?.document.fileName,
+		anProvider
 	);
-
+	
 	context.subscriptions.push(
 		vscode.window.registerWebviewViewProvider(
-			NoteInputProvider.viewType, provider
+			NoteInputProvider.viewType, niProvider
+		)
+	);
+	context.subscriptions.push(
+		vscode.window.registerWebviewViewProvider(
+			AllNotesProvider.viewType, anProvider
 		)
 	);
 
@@ -31,7 +39,7 @@ export async function activate(context: vscode.ExtensionContext) {
 				);
 				return;
 			}
-			await provider.resetView();
+			await niProvider.resetView();
 			vscode.commands.executeCommand('niview.focus');
 		})
 	);
@@ -52,8 +60,8 @@ export async function activate(context: vscode.ExtensionContext) {
 				);
 			}
 			else {
-				await provider.resetView();
-				provider.ephemeralMode = true;
+				await niProvider.resetView();
+				niProvider.ephemeralMode = true;
 				vscode.commands.executeCommand('niview.focus');
 			}
 		})
@@ -68,7 +76,7 @@ export async function activate(context: vscode.ExtensionContext) {
 				);
 				return;
 			}
-			await provider.deleteSticky(filepath);
+			await niProvider.deleteSticky(filepath);
 		})
 	);
 
@@ -86,7 +94,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	async function openNote(editor?: vscode.TextEditor) {
 		let currFile = editor?.document.fileName;
-		await provider.switchFile(currFile);
+		await niProvider.switchFile(currFile);
 		if (currFile && context.globalState.get(currFile)) {
 			vscode.commands.executeCommand('niview.focus');
 		}
