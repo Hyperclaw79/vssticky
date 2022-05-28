@@ -16,13 +16,13 @@
     white-space: pre-wrap;
 }
 
+.noteInput {
+    resize: vertical;
+}
+
 .noteInput:focus,
 .rendered:focus {
     outline-color: var(--vscode-input-border);
-}
-
-.noteInput {
-    resize: vertical;
 }
 
 .rendered ul,

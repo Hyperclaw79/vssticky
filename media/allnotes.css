@@ -9,7 +9,7 @@ h2 {
 }
 
 p {
-    font-family: 'Reenie Beanie';
+    font-family: 'Reenie Beanie', sans-serif;
     font-size: 1rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -36,13 +36,13 @@ ul li a {
     width: 16em;
     padding: 1em;
     box-shadow: -2px -2px 3px rgb(0 0 0);
-    transition: transform .15s linear;
+    transition: transform 0.15s linear;
 }
 
 ul li a:hover,
 ul li a:focus,
 ul li a:active {
-    box-shadow: 10px 10px 7px rgba(0, 0, 0, .7);
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.7);
     transform: scale(1.25);
     position: relative;
     z-index: 5;

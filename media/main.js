@@ -32,7 +32,7 @@ const rgbToHex = (r, g, b) => {
         if (matches.length < 1 || matches[0].length < 4) {
             throw new Error('Invalid rgb string');
         }
-        let [r_, g_, b_] = matches[0].splice(1).map(x => parseInt(x));
+        let [r_, g_, b_] = matches[0].splice(1).map(x => parseInt(x, 10));
         return toHex(r_, g_, b_);
     }
     else if (g && b) {
