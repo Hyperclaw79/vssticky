@@ -1,14 +1,39 @@
 {
   "name": "vssticky",
   "displayName": "VSSticky",
-  "description": "Attach sticky notes on your files, from inside VS Code.",
-  "version": "0.6.1",
-  "engines": {
-    "vscode": "^1.67.0"
+  "description": "Attach Sticky Notes on your files, from inside VS Code.",
+  "author": "Hyperclaw79",
+  "publisher": "Hyperclaw79",
+  "version": "1.0.0",
+  "icon": "assets/vssticky.png",
+  "galleryBanner": {
+    "color": "#770000",
+    "theme": "dark"
   },
+  "license": "MIT",
+  "homepage": "https://github.com/Hyperclaw79/vssticky#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hyperclaw79/vssticky.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hyperclaw79/vssticky/issues",
+    "email": "harshith.thota7@gmail.com"
+  },
+  "keywords": [
+    "vscode",
+    "vscode-extension",
+    "extensions",
+    "sticky-notes"
+  ],
   "categories": [
     "Other"
   ],
+  "engines": {
+    "vscode": "^1.67.0",
+    "node": ">=16.13.0",
+    "npm": ">=8.10.0"
+  },
   "activationEvents": [
     "onStartupFinished"
   ],
@@ -70,7 +95,7 @@
         {
           "id": "notesPanel",
           "title": "Notes",
-          "icon": "media/ni-icon.png"
+          "icon": "assets/ni-icon.png"
         }
       ]
     },
@@ -85,7 +110,8 @@
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "deploy": "vsce publish"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
@@ -100,6 +126,7 @@
     "mocha": "^9.2.2",
     "ts-loader": "^9.2.8",
     "typescript": "^4.6.4",
+    "vsce": "^2.8.0",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2"
   },

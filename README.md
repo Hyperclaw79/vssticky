@@ -1,69 +1,70 @@
-# vssticky README
+# VSSticky - The Last Sticky Notes Extension You'll Need.
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Hyperclaw79/vssticky/Build%20&%20Deploy?logo=Github&style=for-the-badge)
+![Version](https://img.shields.io/github/package-json/v/hyperclaw79/vssticky?style=for-the-badge)
+![Code Quality](https://img.shields.io/codacy/grade/3e636a1d0fe141e780cb967704b1d7a1?style=for-the-badge)
 
+It's pretty common to keep getting newer ideas or an annoying bug that you need to fix later.\
+So you'd want to write them down somewhere.\
+What better way to do that than to use **Sticky Notes** right?! \
+Now you don't need to maintain them externally, with <big>**VSSticky**</big>, you can attach sticky notes from within VSCode!
+
+## Why VSSticky? :memo:
+There are tons of sticky notes extensions out there, but what makes <big>**VSSticky**</big> different?\
+<big>**VSSticky**</big> is a first of a kind extension that offers isolated sticky notes.\
+You can have `seperate sticky notes for every file`.
+> You can focus better on the task at hand.\
+> No more the need for scavenging through a bunch of sticky notes to find the one that you had planned for a particular file.
+
+[<img src="./assets/vssticky_preview.gif" width="50%">](./assets/vssticky_preview.gif)
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+* Add Persistent Sticky Notes for every file.
 
-For example if there is an image subfolder under your extension project workspace:
+* Create Ephemeral (temporary) Sticky Notes which auto-delete on file change.
 
-\!\[feature X\]\(images/feature-x.png\)
+* The Sticky Note is a Markdown editor that you can double click to edit.
+    > It support emojis, checkboxes and images as well.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+* Set unique color for every Sticky Note.
 
-## Requirements
+* **All Sticky Notes Webview**
+    > A consolidated sticky notes view in the Explorer for all files.
+    * Auto-refreshes when a sticky note is added, updated or removed.
+    * Double Click on a Sticky Note to jump to file.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Installation
+
+To install <big>**VSSticky**</big>, you have three options:
+1. Search for `VSSticky` in the Extensions panel on VS Code.
+2. Open VSCode Quickbar using <kbd>Ctrl</kbd> + <kbd>P</kbd> and run the command `ext install Hyperclaw79.vssticky`.
+3. Install it from the Marketplace:\
+[![Visual Studio Marketplace Version](https://img.shields.io/github/package-json/v/hyperclaw79/vssticky?label=VSSticky&logo=Visual%20Studio%20Code&logoColor=blue&style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=Hyperclaw79.vssticky)
+
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+<big>**VSSticky**</big> exposes one User Setting:
 
-For example:
+* `vssticky.autosaveInterval`: This is the time in milliseconds between each autosave for a sticky note. Defaults to 500.
 
-This extension contributes the following settings:
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+## Commands
 
-## Known Issues
+Following are the commands that you can use in the VSCode context menu.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Command | Description
+:---: | :---
+`Add Sticky Note` | Add a new sticky note.
+`Delete Sticky Note` | Remove the selected sticky note.
+`Add Ephemeral Note` | Add a new ephemeral note.
+`Delete All Notes` | Delete all created Sticky Notes.
+
+
+## Contribution
+
+Please read the [Contribution Guide](./CONTRIBUTING.md) to help improve VSSticky.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Please read the [release notes](./CHANGELOG.md) to learn about the latest changes.
