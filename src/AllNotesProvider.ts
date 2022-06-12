@@ -60,7 +60,7 @@ export class AllNotesProvider implements vscode.WebviewViewProvider {
     }
 
     private _createNotes() {
-        this._notes = this._context.globalState.keys().map(key => {
+        this._notes = [...this._context.globalState.keys()].sort().map(key => {
             let noteObj: Note = JSON.parse(
                 this._context.globalState.get(key)!
             );
