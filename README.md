@@ -44,6 +44,12 @@ You can have `seperate sticky notes for every file`.
 
     [<img src="./assets/AllNotesView.gif" width="40%">](./assets/AllNotesView.gif)
 
+* **TODO List**
+    > A consolidated TODO list containing all your sticky notes in a single Markdown preview.
+    * The list is sorted in a tree-like manner.
+
+    [<img src="./assets/TODO.jpg" width="50%">](./assets/TODO.jpg)
+
 ## Installation 🛠
 
 To install <big>**VSSticky**</big>, you have three options:
@@ -70,6 +76,9 @@ Command | Description
 `Delete Sticky Note` | Remove the selected sticky note.
 `Add Ephemeral Note` | Add a new ephemeral note.
 `Delete All Notes` | Delete all created Sticky Notes.
+`Import Sticky Notes` | Import sticky notes from a JSON file.
+`Export Sticky Notes` | Export sticky notes to a JSON file.
+`Create Todo` | Create a TODO list from all the sticky notes.
 
 
 ## Tips 💡

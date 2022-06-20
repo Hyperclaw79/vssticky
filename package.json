@@ -4,7 +4,7 @@
   "description": "Attach Sticky Notes on your files, from inside VS Code.",
   "author": "Hyperclaw79",
   "publisher": "Hyperclaw79",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "icon": "assets/vssticky.png",
   "galleryBanner": {
     "color": "#770000",
@@ -72,6 +72,21 @@
         "command": "vssticky.deleteAllNotes",
         "category": "VSSticky",
         "title": "Delete All Notes"
+      },
+      {
+        "command": "vssticky.exportStickyNotes",
+        "category": "VSSticky",
+        "title": "Export Sticky Notes"
+      },
+      {
+        "command": "vssticky.importStickyNotes",
+        "category": "VSSticky",
+        "title": "Import Sticky Notes"
+      },
+      {
+        "command": "vssticky.createTodo",
+        "category": "VSSticky",
+        "title": "Create a Todo.md"
       }
     ],
     "views": {
