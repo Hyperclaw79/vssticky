@@ -4,7 +4,7 @@
   "description": "Attach Sticky Notes on your files, from inside VS Code.",
   "author": "Hyperclaw79",
   "publisher": "Hyperclaw79",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "icon": "assets/vssticky.png",
   "galleryBanner": {
     "color": "#770000",
@@ -87,6 +87,11 @@
         "command": "vssticky.createTodo",
         "category": "VSSticky",
         "title": "Create a Todo.md"
+      },
+      {
+        "command": "vssticky.copySelectionToNote",
+        "category": "VSSticky",
+        "title": "Copy Selection to Existing Note"
       }
     ],
     "views": {
@@ -111,6 +116,22 @@
           "id": "notesPanel",
           "title": "Notes",
           "icon": "assets/ni-icon.png"
+        }
+      ]
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "vssticky.copySelectionToNote",
+          "group": "9_cutcopypaste",
+          "when": "editorHasSelection"
+        }
+      ],
+      "editor/context/copy": [
+        {
+          "command": "vssticky.copySelectionToNote",
+          "group": "navigation",
+          "when": "editorHasSelection"
         }
       ]
     },

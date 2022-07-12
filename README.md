@@ -50,6 +50,11 @@ You can have `seperate sticky notes for every file`.
 
     [<img src="./assets/TODO.jpg" width="50%">](./assets/TODO.jpg)
 
+* **Copy Sticky Note as Codeblock**
+    > Right click on a selection of text to copy as codeblock to the active sticky note.
+
+    [<img src="./assets/CopyAsCodeblock.gif" width="50%">](./assets/CopyAsCodeblock.gif)
+
 ## Installation 🛠
 
 To install <big>**VSSticky**</big>, you have three options:
@@ -79,6 +84,7 @@ Command | Description
 `Import Sticky Notes` | Import sticky notes from a JSON file.
 `Export Sticky Notes` | Export sticky notes to a JSON file.
 `Create Todo` | Create a TODO list from all the sticky notes.
+`Copy Selection to Existing Note` | Copy the selected text to the active sticky note.
 
 
 ## Tips 💡

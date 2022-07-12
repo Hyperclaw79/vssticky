@@ -213,6 +213,41 @@ export async function activate(context: vscode.ExtensionContext) {
 		})
 	);
 
+	context.subscriptions.push(
+		vscode.commands.registerCommand('vssticky.copySelectionToNote', async () => {
+			let editor = vscode.window.activeTextEditor;
+			if (!editor) {
+				vscode.window.showErrorMessage(
+					'You need to use this command when editing a file.'
+				);
+				return;
+			}
+			let selection = editor.selection;
+			let text = editor.document.getText(selection);
+			if (!text) {
+				vscode.window.showErrorMessage(
+					'You need to select some text to copy.'
+				);
+				return;
+			}
+			let activeNote: string | undefined = context.globalState.get(
+				editor.document.fileName
+			);
+			if (!activeNote) {
+				vscode.window.showErrorMessage(
+					'You need to create a sticky note before using this command.'
+				);
+				return;
+			}
+			let fileExt = path.extname(editor.document.fileName).replace('.', '');
+			let note = JSON.parse(activeNote);
+			note.content += `\n\`\`\`${fileExt}\n${text}\n\`\`\``;
+			context.globalState.update(editor.document.fileName, JSON.stringify(note));
+			niProvider.resetView();
+			anProvider.refreshNotes();
+		})
+	);
+
 	async function openNote(editor?: vscode.TextEditor) {
 		let currFile = editor?.document.fileName;
 		await niProvider.switchFile(currFile);
