@@ -18,3 +18,7 @@ All notable changes to the "VSSticky" extension will be documented in this file.
 ### v1.0.3
 
 - Right click on a selection of text to copy as codeblock to the active sticky note.
+
+### v1.0.4
+
+- Fixed the position of the note color selection button.

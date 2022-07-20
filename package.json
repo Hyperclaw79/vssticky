@@ -4,7 +4,7 @@
   "description": "Attach Sticky Notes on your files, from inside VS Code.",
   "author": "Hyperclaw79",
   "publisher": "Hyperclaw79",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "icon": "assets/vssticky.png",
   "galleryBanner": {
     "color": "#770000",
