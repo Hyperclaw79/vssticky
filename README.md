@@ -1,5 +1,5 @@
 # VSSticky - The Last Sticky Notes Extension You'll Need.
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Hyperclaw79/vssticky/Build%20&%20Deploy?logo=Github&style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Hyperclaw79/vssticky/build.yml?logo=Github&style=for-the-badge)
 ![Version](https://img.shields.io/github/package-json/v/hyperclaw79/vssticky?style=for-the-badge)
 ![Code Quality](https://img.shields.io/codacy/grade/3e636a1d0fe141e780cb967704b1d7a1?style=for-the-badge)
 
